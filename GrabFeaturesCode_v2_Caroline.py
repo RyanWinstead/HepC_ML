@@ -16,8 +16,33 @@ from sklearn import tree
 from sklearn.model_selection import train_test_split
 from sklearn.tree import DecisionTreeClassifier
 import graphviz 
+import os
 
-directory = r'C:\Users\ablej\OneDrive\Email attachments\Documents\Fall 2020\CSC 306 machine learning\Final'
+# all features file path
+allfeat_file = "/Users/solis/Desktop/GitHub/HepC_ML/allfeatures_final.csv"
+# sends file into specific folder
+DIR_out = '/Users/solis/Desktop/GitHub/HepC_ML/Output_Files'
+
+# exports output to a numbered csv file 
+export_path = DIR_out +'allfeatures_mutFreq_below50%.csv'
+
+#omit data [[50%]] and above & export output to new csv file
+
+def omit_fifty(export_path):
+    with open(allfeat_file, 'rb') as f:       
+        df = pd.read_csv(f, delimiter=' ')#, names = ['pos','makesCpG','bigAAChange','Avg_Mutation_Freq','Mutation_Rate','Cost','Positive',
+        df.to_csv(export_path)                                             # 'AA,Negative', 'AA,Hydrophobic', 'AA,Polar', 'AA,Nonpolar', 'AA,5','UTR','Core','E1','E2',
+                                                      #'HVR1','NS1','NS2','NS3','NS4A','NS4B','NS5A','NS5B'])
+        
+        #df_costs = df.columns
+        
+        for col_name in df.columns: 
+            print(col_name)
+omit_fifty(export_path)
+
+
+        
+#directory = r'C:\Users\ablej\OneDrive\Email attachments\Documents\Fall 2020\CSC 306 machine learning\Final'
 AA_change = pd.read_csv('H77_metadata.csv')
 sample_freqs = pd.read_csv('HCV1a_TsMutFreq_195.csv')
 mut_rate = pd.read_csv('Geller.mutation.rates_update.csv')
@@ -158,6 +183,33 @@ allfeaturesV4 = pd.concat([allfeaturesV3,CostLabelChange],axis=1, sort=False)
 #allfeaturesV2.to_csv ('allfeaturesV2.csv', index = False, header=True)
 #allfeaturesV3.to_csv('allfeaturesV3.csv', index=False, header=True)
 allfeaturesV4.to_csv('allfeaturesV4.csv', index=False, header=True)
+
+#################################################################################
+
+# all features file path
+allfeat_file = "/Users/solis/Desktop/GitHub/HepC_ML/allfeatures_final.csv"
+# sends file into specific folder
+DIR_out = '/Users/solis/Desktop/GitHub/HepC_ML/Output_Files'
+
+# exports output to a numbered csv file 
+export_path = DIR_out +'allfeatures_mutFreq_below50%.csv'
+
+#omit data [[50%]] and above & export output to new csv file
+
+def omit_fifty(export_path):
+    with open(allfeat_file, 'rb') as f:       
+        df = pd.read_csv(f)
+        for col_name in df.columns: 
+            #cost = df["Cost"]
+            below_fifty = df[df["Cost"] < .500]
+            below_fifty.to_csv(export_path)  
+            print(below_fifty)
+omit_fifty(export_path)
+
+
+#################################################################################
+
+
 
 
 "Create histogram of Costs"
