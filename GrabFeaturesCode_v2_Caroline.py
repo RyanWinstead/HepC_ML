@@ -18,28 +18,6 @@ from sklearn.tree import DecisionTreeClassifier
 import graphviz 
 import os
 
-# all features file path
-allfeat_file = "/Users/solis/Desktop/GitHub/HepC_ML/allfeatures_final.csv"
-# sends file into specific folder
-DIR_out = '/Users/solis/Desktop/GitHub/HepC_ML/Output_Files'
-
-# exports output to a numbered csv file 
-export_path = DIR_out +'allfeatures_mutFreq_below50%.csv'
-
-#omit data [[50%]] and above & export output to new csv file
-
-def omit_fifty(export_path):
-    with open(allfeat_file, 'rb') as f:       
-        df = pd.read_csv(f, delimiter=' ')#, names = ['pos','makesCpG','bigAAChange','Avg_Mutation_Freq','Mutation_Rate','Cost','Positive',
-        df.to_csv(export_path)                                             # 'AA,Negative', 'AA,Hydrophobic', 'AA,Polar', 'AA,Nonpolar', 'AA,5','UTR','Core','E1','E2',
-                                                      #'HVR1','NS1','NS2','NS3','NS4A','NS4B','NS5A','NS5B'])
-        
-        #df_costs = df.columns
-        
-        for col_name in df.columns: 
-            print(col_name)
-omit_fifty(export_path)
-
 
         
 #directory = r'C:\Users\ablej\OneDrive\Email attachments\Documents\Fall 2020\CSC 306 machine learning\Final'
@@ -184,30 +162,51 @@ allfeaturesV4 = pd.concat([allfeaturesV3,CostLabelChange],axis=1, sort=False)
 #allfeaturesV3.to_csv('allfeaturesV3.csv', index=False, header=True)
 allfeaturesV4.to_csv('allfeaturesV4.csv', index=False, header=True)
 
-#################################################################################
+#%% removes data above 50%
 
 # all features file path
 allfeat_file = "/Users/solis/Desktop/GitHub/HepC_ML/allfeatures_final.csv"
 # sends file into specific folder
-DIR_out = '/Users/solis/Desktop/GitHub/HepC_ML/Output_Files'
-
+DIR_out = '/Users/solis/Desktop/GitHub/HepC_ML/Output_Files/'
 # exports output to a numbered csv file 
 export_path = DIR_out +'allfeatures_mutFreq_below50%.csv'
 
 #omit data [[50%]] and above & export output to new csv file
-
 def omit_fifty(export_path):
     with open(allfeat_file, 'rb') as f:       
         df = pd.read_csv(f)
-        for col_name in df.columns: 
-            #cost = df["Cost"]
-            below_fifty = df[df["Cost"] < .500]
-            below_fifty.to_csv(export_path)  
-            print(below_fifty)
+        below_fifty = df[df["Cost"] <= .50]
+        below_fifty.to_csv(export_path)  
+        print(below_fifty)
 omit_fifty(export_path)
 
 
-#################################################################################
+
+
+#%% User input function for any given percentage
+
+
+# allfeaturesV4 file path
+allfeat_file = "/Users/solis/Desktop/GitHub/HepC_ML/allfeaturesV4.csv"
+# sends file into new folder on desktop
+DIR_out = '/Users/solis/Desktop/GitHub/HepC_ML/Output_Files/'
+#user input to filter any percentage
+value = input("Filter out by percentage (in decimal format): ")
+# exports output to a numbered csv file 
+export_path = DIR_out + "allfeaturesV4_Cost_below_"+str(value)+"%"+".csv" #generate a unique file name based on user input number
+
+
+#omit data [[value%]] and above & export output to new csv file
+def Omit_Costs(export_path):
+    with open(allfeat_file, 'rb') as f:       
+        df = pd.read_csv(f)
+        below_percent = df[df["Cost"] <= float(value)] #removes data above specific cost and keeps percentage below
+        below_percent.to_csv(export_path)  #sends to a new csv file each time
+        return(below_percent)
+Omit_Costs(export_path)
+
+
+#%%
 
 
 
