@@ -1,0 +1,21 @@
+Feature List
+
+Pro , Gly mutations
+Trp , Tyr , Cys 
+Drastic Change: (any one group to another)
+    -Positive-charged (arginine (R), histidine (H), lysine (K)), 
+    -Negative-charged (aspartic acid (D) and glutamic acid (E)), 
+    -Uncharged (serine (S), threonine (T), asparagine (N) and glutamine (Q)), 
+    -Hydrophobic groups (alanine (A), isoleucine (I), leucine (L), phenylalanine (F), methionine (M), tryptophan (W), tyrosine (Y) and valine (V)), 
+    -Special amino acids (cysteine (C), glycine (G) and proline (P))   https://journals.plos.org/plosgenetics/article?id=10.1371/journal.pgen.1007420
+
+Ala <-> Val  https://pubmed.ncbi.nlm.nih.gov/31078622/
+-> Gly ->
+-> Pro ->
+-> Ala ->
+syn mutations
+non synon mutations 
+    nonsense mutations
+C or G at reference
+A or T at reference
+
